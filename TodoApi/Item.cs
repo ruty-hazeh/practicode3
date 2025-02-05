@@ -11,3 +11,4 @@ public partial class Item
 
     public bool? IsComplete { get; set; }
 }
+  // "my_db": "server=localhost;user=root;password=rha1828!;database=my_db"
