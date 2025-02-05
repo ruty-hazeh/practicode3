@@ -14,16 +14,16 @@ var builder = WebApplication.CreateBuilder(args);
 //               .AllowAnyHeader();
 //     });
 // });
-builder.Services.AddCors(options =>
-{
-    options.AddDefaultPolicy(policy =>
-    {
-        policy.WithOrigins("https://practicode3client.onrender.com") // הלקוח שלך
-              .AllowAnyMethod()
-              .AllowAnyHeader()
-              .AllowCredentials();  // הוספת AllowCredentials במידת הצורך
-    });
-});
+// builder.Services.AddCors(options =>
+// {
+//     options.AddDefaultPolicy(policy =>
+//     {
+//         policy.WithOrigins("https://practicode3client.onrender.com") // הלקוח שלך
+//               .AllowAnyMethod()
+//               .AllowAnyHeader()
+//               .AllowCredentials();  // הוספת AllowCredentials במידת הצורך
+//     });
+// });
 // builder.Services.AddCors(options =>
 // {
 //     options.AddDefaultPolicy(policy =>
@@ -33,6 +33,18 @@ builder.Services.AddCors(options =>
 //               .AllowAnyHeader();
 //     });
 // });
+
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policy =>
+    {
+        policy.AllowAnyOrigin() // לא מוגבל לאוריגין ספציפי
+              .AllowAnyMethod()
+              .AllowAnyHeader()
+              .AllowCredentials();
+    });
+});
+
 // חיבור ל-DbContext
 builder.Services.AddDbContext<ToDoDbContext>(options =>
     options.UseMySql(
