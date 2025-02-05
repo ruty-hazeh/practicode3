@@ -12,3 +12,4 @@ public partial class Item
     public bool? IsComplete { get; set; }
 }
   // "my_db": "server=localhost;user=root;password=rha1828!;database=my_db"
+//  "Server=busaqvzpmohlewvrqmq8-mysql.services.clever-cloud.com;Database=busaqvzpmohlewvrqmq8;User=ucb2fvhjxlectphj;Password=awvgIKkEx4RVJQU0ZKAP"
