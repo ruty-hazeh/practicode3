@@ -9,11 +9,7 @@ var app = builder.Build();
 
 
 //using in cors
-app.UseCors();
 
-// Enable Swagger UI
-app.UseSwagger();
-app.UseSwaggerUI();
 
 // // הוספת שירותי CORS
 // builder.Services.AddCors(options =>
@@ -37,6 +33,11 @@ builder.Services.AddCors(options =>
               .AllowAnyHeader();
     });
 });
+app.UseCors();
+
+// Enable Swagger UI
+app.UseSwagger();
+app.UseSwaggerUI();
 
 // חיבור ל-DbContext
 builder.Services.AddDbContext<ToDoDbContext>(options =>
