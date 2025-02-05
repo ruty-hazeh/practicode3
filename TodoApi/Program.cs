@@ -5,6 +5,15 @@ using Microsoft.OpenApi.Models;
 var builder = WebApplication.CreateBuilder(args);
 
 
+var app = builder.Build();
+
+
+//using in cors
+app.UseCors();
+
+// Enable Swagger UI
+app.UseSwagger();
+app.UseSwaggerUI();
 
 // // הוספת שירותי CORS
 // builder.Services.AddCors(options =>
@@ -41,15 +50,6 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 
-var app = builder.Build();
-
-
-//using in cors
-app.UseCors();
-
-// Enable Swagger UI
-app.UseSwagger();
-app.UseSwaggerUI();
 
 app.MapGet("/items", async (ToDoDbContext context) =>
 {
