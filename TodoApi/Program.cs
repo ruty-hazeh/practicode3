@@ -6,17 +6,28 @@ var builder = WebApplication.CreateBuilder(args);
 
 
 
-// הוספת שירותי CORS
+// // הוספת שירותי CORS
+// builder.Services.AddCors(options =>
+// {
+//     options.AddDefaultPolicy(policy =>
+//     {
+//         policy.AllowAnyOrigin()
+//               .AllowAnyMethod()
+//               .AllowAnyHeader();
+//     });
+// });
+
+
+
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(policy =>
     {
-        policy.AllowAnyOrigin()
+        policy.WithOrigins("https://practicode3client.onrender.com") // לאפשר רק לקליינט שלך
               .AllowAnyMethod()
               .AllowAnyHeader();
     });
 });
-
 
 // חיבור ל-DbContext
 builder.Services.AddDbContext<ToDoDbContext>(options =>
