@@ -8,31 +8,29 @@ var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 
 
-//using in cors
 
-
-// // הוספת שירותי CORS
-// builder.Services.AddCors(options =>
-// {
-//     options.AddDefaultPolicy(policy =>
-//     {
-//         policy.AllowAnyOrigin()
-//               .AllowAnyMethod()
-//               .AllowAnyHeader();
-//     });
-// });
-
-
-
+// הוספת שירותי CORS
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(policy =>
     {
-        policy.WithOrigins("https://practicode3client.onrender.com") // לאפשר רק לקליינט שלך
+        policy.AllowAnyOrigin()
               .AllowAnyMethod()
               .AllowAnyHeader();
     });
 });
+
+
+
+// builder.Services.AddCors(options =>
+// {
+//     options.AddDefaultPolicy(policy =>
+//     {
+//         policy.WithOrigins("https://practicode3client.onrender.com") // לאפשר רק לקליינט שלך
+//               .AllowAnyMethod()
+//               .AllowAnyHeader();
+//     });
+// });
 app.UseCors();
 
 // Enable Swagger UI
