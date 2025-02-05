@@ -18,11 +18,21 @@ builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(policy =>
     {
-        policy.WithOrigins("https://practicode3client.onrender.com") // לקוח שלך
+        policy.WithOrigins("https://practicode3client.onrender.com") // הלקוח שלך
               .AllowAnyMethod()
-              .AllowAnyHeader();
+              .AllowAnyHeader()
+              .AllowCredentials();  // הוספת AllowCredentials במידת הצורך
     });
 });
+// builder.Services.AddCors(options =>
+// {
+//     options.AddDefaultPolicy(policy =>
+//     {
+//         policy.WithOrigins("https://practicode3client.onrender.com") // לקוח שלך
+//               .AllowAnyMethod()
+//               .AllowAnyHeader();
+//     });
+// });
 // חיבור ל-DbContext
 builder.Services.AddDbContext<ToDoDbContext>(options =>
     options.UseMySql(
