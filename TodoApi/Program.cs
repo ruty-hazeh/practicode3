@@ -4,11 +4,6 @@ using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
-var app = builder.Build();
-
-
-
 // הוספת שירותי CORS
 builder.Services.AddCors(options =>
 {
@@ -19,24 +14,6 @@ builder.Services.AddCors(options =>
               .AllowAnyHeader();
     });
 });
-
-
-
-// builder.Services.AddCors(options =>
-// {
-//     options.AddDefaultPolicy(policy =>
-//     {
-//         policy.WithOrigins("https://practicode3client.onrender.com") // לאפשר רק לקליינט שלך
-//               .AllowAnyMethod()
-//               .AllowAnyHeader();
-//     });
-// });
-app.UseCors();
-
-// Enable Swagger UI
-app.UseSwagger();
-app.UseSwaggerUI();
-
 // חיבור ל-DbContext
 builder.Services.AddDbContext<ToDoDbContext>(options =>
     options.UseMySql(
@@ -47,6 +24,16 @@ builder.Services.AddDbContext<ToDoDbContext>(options =>
 // הוספת שירותים
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+var app = builder.Build();
+
+
+app.UseCors();
+
+// Enable Swagger UI
+app.UseSwagger();
+app.UseSwaggerUI();
+
 
 
 
