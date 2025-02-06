@@ -4,8 +4,7 @@ using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var connectionString = builder.Configuration.GetConnectionString("ToDoListDB");
-Console.WriteLine($"Connection String: {connectionString}");
+
 
 
 builder.Services.AddCors(options =>
