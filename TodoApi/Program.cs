@@ -4,16 +4,10 @@ using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// הוספת שירותי CORS
-// builder.Services.AddCors(options =>
-// {
-//     options.AddDefaultPolicy(policy =>
-//     {
-//         policy.AllowAnyOrigin()
-//               .AllowAnyMethod()
-//               .AllowAnyHeader();
-//     });
-// });
+var connectionString = builder.Configuration.GetConnectionString("ToDoListDB");
+Console.WriteLine($"Connection String: {connectionString}");
+
+
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(policy =>
@@ -24,15 +18,6 @@ builder.Services.AddCors(options =>
               .AllowCredentials();  // הוספת AllowCredentials במידת הצורך
     });
 });
-// builder.Services.AddCors(options =>
-// {
-//     options.AddDefaultPolicy(policy =>
-//     {
-//         policy.WithOrigins("https://practicode3client.onrender.com") // לקוח שלך
-//               .AllowAnyMethod()
-//               .AllowAnyHeader();
-//     });
-// });
 
 // builder.Services.AddCors(options =>
 // {
