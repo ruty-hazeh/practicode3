@@ -1,5 +1,6 @@
 import axios from 'axios';
-axios.defaults.baseURL = process.env.REACT_APP_API_URL;
+const apiUrl = process.env.REACT_APP_API_URL;
+axios.defaults.baseURL = apiUrl; 
 axios.defaults.headers.common['Content-Type'] = 'application/json';
 
 
@@ -11,8 +12,7 @@ axios.interceptors.response.use(
   }
 );
 
-// export default {
-  const apiService = {
+export default {
   // שליפת כל המשימות
   getTasks: async () => {
       const result = await axios.get("/items");
@@ -51,4 +51,3 @@ setCompleted: async (id, name, isComplete) => {
       return response.data;
   },
 };
-export default apiService;
