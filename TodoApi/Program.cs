@@ -6,30 +6,19 @@ var builder = WebApplication.CreateBuilder(args);
 
 
 
-
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(policy =>
     {
-        policy.WithOrigins("https://practicode3client.onrender.com") // הלקוח שלך
+        policy.AllowAnyOrigin()
               .AllowAnyMethod()
-              .AllowAnyHeader()
-              .AllowCredentials();  // הוספת AllowCredentials במידת הצורך
+              .AllowAnyHeader();
     });
 });
 
-// builder.Services.AddCors(options =>
-// {
-//     options.AddDefaultPolicy(policy =>
-//     {
-//         policy.AllowAnyOrigin() // לא מוגבל לאוריגין ספציפי
-//               .AllowAnyMethod()
-//               .AllowAnyHeader()
-//               .AllowCredentials();
-//     });
-// });
-
 // חיבור ל-DbContext
+
+
 builder.Services.AddDbContext<ToDoDbContext>(options =>
     options.UseMySql(
         builder.Configuration.GetConnectionString("ToDoListDB"),
@@ -37,8 +26,8 @@ builder.Services.AddDbContext<ToDoDbContext>(options =>
     ));
 
 // הוספת שירותים
-builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddEndpointsApiExplorer();
 
 var app = builder.Build();
 
