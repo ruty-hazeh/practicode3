@@ -11,7 +11,8 @@ axios.interceptors.response.use(
   }
 );
 
-export default {
+// export default {
+  const apiService = {
   // שליפת כל המשימות
   getTasks: async () => {
       const result = await axios.get("/items");
@@ -50,3 +51,4 @@ setCompleted: async (id, name, isComplete) => {
       return response.data;
   },
 };
+export default apiService;
