@@ -5,16 +5,26 @@ using Microsoft.OpenApi.Models;
 var builder = WebApplication.CreateBuilder(args);
 
 
+// builder.Services.AddCors(options =>
+// {
+//     options.AddDefaultPolicy(policy =>
+//     {
+//         policy.AllowAnyOrigin()
+//               .AllowAnyMethod()
+//               .AllowAnyHeader();
+//     });
+// });
+
+
 builder.Services.AddCors(options =>
 {
-    options.AddDefaultPolicy(policy =>
+    options.AddPolicy("AllowSpecificOrigin", policy =>
     {
-        policy.AllowAnyOrigin()
+        policy.WithOrigins("https://practicode3client.onrender.com") // החלף עם הכתובת של הקליינט שלך
               .AllowAnyMethod()
               .AllowAnyHeader();
     });
 });
-
 // חיבור ל-DbContext
 
 Console.WriteLine($"Connection String: {builder.Configuration.GetConnectionString("ToDoListDB")}");
@@ -32,7 +42,8 @@ builder.Services.AddEndpointsApiExplorer();
 var app = builder.Build();
 
 
-app.UseCors();
+// app.UseCors();
+app.UseCors("AllowSpecificOrigin");
 
 // Enable Swagger UI
 app.UseSwagger();
