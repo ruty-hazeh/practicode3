@@ -5,48 +5,26 @@ using Microsoft.OpenApi.Models;
 var builder = WebApplication.CreateBuilder(args);
 
 
-// builder.Services.AddCors(options =>
-// {
-//     options.AddDefaultPolicy(policy =>
-//     {
-//         policy.AllowAnyOrigin()
-//               .AllowAnyMethod()
-//               .AllowAnyHeader();
-//     });
-// });
-
-
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowSpecificOrigin", policy =>
+    options.AddDefaultPolicy(policy =>
     {
-        policy.WithOrigins("https://practicode3client.onrender.com") // החלף עם הכתובת של הקליינט שלך
+        policy.AllowAnyOrigin()
               .AllowAnyMethod()
               .AllowAnyHeader();
     });
 });
 
+
 // חיבור ל-DbContext
 
 Console.WriteLine($"Connection String: {builder.Configuration.GetConnectionString("ToDoListDB")}");
 
-// builder.Services.AddDbContext<ToDoDbContext>(options =>
-//     options.UseMySql(
-//         builder.Configuration.GetConnectionString("ToDoListDB"),
-//         ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("ToDoListDB"))
-//     ));
-try
-{
-    builder.Services.AddDbContext<ToDoDbContext>(options =>
-        options.UseMySql(
-            builder.Configuration.GetConnectionString("ToDoListDB"),
-            ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("ToDoListDB"))
-        ));
-}
-catch (Exception ex)
-{
-    Console.WriteLine($"Database connection failed: {ex.Message}");
-}
+builder.Services.AddDbContext<ToDoDbContext>(options =>
+    options.UseMySql(
+        builder.Configuration.GetConnectionString("ToDoListDB"),
+        ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("ToDoListDB"))
+    ));
 // הוספת שירותים
 builder.Services.AddSwaggerGen();
 builder.Services.AddEndpointsApiExplorer();
@@ -54,8 +32,8 @@ builder.Services.AddEndpointsApiExplorer();
 var app = builder.Build();
 
 
-// app.UseCors();
-app.UseCors("AllowSpecificOrigin");
+app.UseCors();
+
 
 // Enable Swagger UI
 app.UseSwagger();
