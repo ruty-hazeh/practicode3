@@ -13,3 +13,4 @@ public partial class Item
 }
   // "my_db": "server=localhost;user=root;password=rha1828!;database=my_db"
 //  "Server=busaqvzpmohlewvrqmq8-mysql.services.clever-cloud.com;Database=busaqvzpmohlewvrqmq8;User=ucb2fvhjxlectphj;Password=awvgIKkEx4RVJQU0ZKAP"
+//  "ToDoListDB": "Server=busaqvzpmohlewvrqmq8-mysql.services.clever-cloud.com;Database=busaqvzpmohlewvrqmq8;User=ucb2fvhjxlectphj;Password=awvgIKkEx4RVJQU0ZKAP;"
