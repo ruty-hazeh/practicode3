@@ -5,23 +5,17 @@ using Pomelo.EntityFrameworkCore.MySql.Scaffolding.Internal;
 
 namespace TodoApi;
 
-public partial class ToDoDbContext : DbContext
+public partial class ToDoDbContext(IConfiguration configuration) : DbContext
 {
-    public ToDoDbContext()
-    {
-    }
+    private readonly IConfiguration _config = configuration;
 
-    public ToDoDbContext(DbContextOptions<ToDoDbContext> options)
-        : base(options)
-    {
-    }
 
     public virtual DbSet<Item> Items { get; set; }
 
     public virtual DbSet<User> Users { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseMySql("name=my_db", Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.40-mysql"));
+        => optionsBuilder.UseMySql(_config.GetConnectionString("ToDoListDB"), Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.40-mysql"));
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

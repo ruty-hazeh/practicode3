@@ -17,14 +17,15 @@ builder.Services.AddCors(options =>
 
 
 // חיבור ל-DbContext
+var cs = builder.Configuration.GetConnectionString("ToDoListDB");
 
-Console.WriteLine($"Connection String: {builder.Configuration.GetConnectionString("ToDoListDB")}");
+Console.WriteLine($"Connection String: {cs}");
 
-builder.Services.AddDbContext<ToDoDbContext>(options =>
-    options.UseMySql(
-        builder.Configuration.GetConnectionString("ToDoListDB"),
-        ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("ToDoListDB"))
-    ));
+builder.Services.AddDbContext<ToDoDbContext>();
+// builder.Services.AddDbContext<ToDoDbContext>(options =>
+//     options.UseMySql(
+//         cs, Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.40-mysql")
+// ));
 // הוספת שירותים
 builder.Services.AddSwaggerGen();
 builder.Services.AddEndpointsApiExplorer();
