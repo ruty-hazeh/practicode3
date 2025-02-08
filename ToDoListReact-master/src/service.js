@@ -1,5 +1,6 @@
 import axios from 'axios';
 const apiUrl = process.env.REACT_APP_API_URL;
+// const apiUrl = "http://localhost:5095";
 console.log("API URL:", apiUrl);
 axios.defaults.baseURL = apiUrl; 
 axios.defaults.headers.common['Content-Type'] = 'application/json';
@@ -53,3 +54,6 @@ setCompleted: async (id, name, isComplete) => {
       return response.data;
   },
 };
+
+
+
