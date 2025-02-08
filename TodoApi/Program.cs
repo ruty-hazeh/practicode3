@@ -17,7 +17,7 @@ builder.Services.AddCors(options =>
 
 
 // חיבור ל-DbContext
-var cs = builder.Configuration.GetConnectionString("ToDoDB");
+var cs = builder.Configuration.GetConnectionString("ToDoListDB");
 
 Console.WriteLine($"Connection String: {cs}");
 
