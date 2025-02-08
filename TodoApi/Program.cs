@@ -17,6 +17,7 @@ builder.Services.AddCors(options =>
 
 // חיבור ל-DbContext
 
+Console.WriteLine($"Connection String: {builder.Configuration.GetConnectionString("ToDoListDB")}");
 
 builder.Services.AddDbContext<ToDoDbContext>(options =>
     options.UseMySql(

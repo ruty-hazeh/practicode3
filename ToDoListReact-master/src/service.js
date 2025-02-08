@@ -1,5 +1,6 @@
 import axios from 'axios';
 const apiUrl = process.env.REACT_APP_API_URL;
+console.log("API URL:", apiUrl);
 axios.defaults.baseURL = apiUrl; 
 axios.defaults.headers.common['Content-Type'] = 'application/json';
 
@@ -44,7 +45,8 @@ setCompleted: async (id, name, isComplete) => {
     console.error('Error updating todo:', error);
     throw error;
   }
-},// מחיקת משימה
+},
+// מחיקת משימה
   deleteTask: async (id) => {
     console.log('deleteTask')
       const response = await axios.delete(`/items/${id}`);
