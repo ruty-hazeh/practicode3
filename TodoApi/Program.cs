@@ -25,16 +25,28 @@ builder.Services.AddCors(options =>
               .AllowAnyHeader();
     });
 });
+
 // חיבור ל-DbContext
 
 Console.WriteLine($"Connection String: {builder.Configuration.GetConnectionString("ToDoListDB")}");
 
-builder.Services.AddDbContext<ToDoDbContext>(options =>
-    options.UseMySql(
-        builder.Configuration.GetConnectionString("ToDoListDB"),
-        ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("ToDoListDB"))
-    ));
-
+// builder.Services.AddDbContext<ToDoDbContext>(options =>
+//     options.UseMySql(
+//         builder.Configuration.GetConnectionString("ToDoListDB"),
+//         ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("ToDoListDB"))
+//     ));
+try
+{
+    builder.Services.AddDbContext<ToDoDbContext>(options =>
+        options.UseMySql(
+            builder.Configuration.GetConnectionString("ToDoListDB"),
+            ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("ToDoListDB"))
+        ));
+}
+catch (Exception ex)
+{
+    Console.WriteLine($"Database connection failed: {ex.Message}");
+}
 // הוספת שירותים
 builder.Services.AddSwaggerGen();
 builder.Services.AddEndpointsApiExplorer();
