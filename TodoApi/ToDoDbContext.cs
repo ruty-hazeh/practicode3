@@ -14,9 +14,13 @@ public partial class ToDoDbContext(IConfiguration configuration) : DbContext
 
     public virtual DbSet<User> Users { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseMySql(_config.GetConnectionString("ToDoListDB"), Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.40-mysql"));
-
+    // protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    //     => optionsBuilder.UseMySql(_config.GetConnectionString("ToDoListDB"), Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.40-mysql"));
+protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    => optionsBuilder.UseMySql(_config.GetConnectionString("ToDoListDB"), 
+        Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.40-mysql"), 
+        options => options
+         .EnableRetryOnFailure(6, TimeSpan.FromSeconds(10), null));
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder
@@ -27,7 +31,7 @@ public partial class ToDoDbContext(IConfiguration configuration) : DbContext
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
 
-            entity.ToTable("items");
+            entity.ToTable("Items");
 
             entity.Property(e => e.Name).HasMaxLength(100);
         });
